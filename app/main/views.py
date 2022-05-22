@@ -61,3 +61,10 @@ def post_blog():
 def get_all_blogs():
     blogs = Blog.query.all()
     return render_template('blogsIndex.html', blogs=blogs)
+
+@main.route('/blog/<int:id>', methods=['GET'])
+def get_blog(id):
+    blog = Blog.query.filter_by(id=id).first()
+    comments = Comment.query.filter_by(blog_id=id).all()
+
+    return render_template('singleBlog.html', blog=blog, comments=comments)
