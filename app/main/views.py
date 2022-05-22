@@ -68,3 +68,18 @@ def get_blog(id):
     comments = Comment.query.filter_by(blog_id=id).all()
 
     return render_template('singleBlog.html', blog=blog, comments=comments)
+
+
+@main.route('/updateBlog/<int:id>', methods=['GET', 'POST'])
+@login_required
+def update_blog(id):
+    blog = Blog.query.filter_by(id=id).first()
+    form = UpdateBlogForm(title=blog.title, blog=blog.blog)
+
+    if form.is_submitted():
+        blog.title = form.title.data
+        blog.blog = form.blog.data
+        blog.update()
+        return render_template('singleBlog.html', blog=blog)
+
+    return render_template('updateBlog.html', blog=blog, form=form)
