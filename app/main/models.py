@@ -59,3 +59,11 @@ class Comment(BaseModel, db.Model):
     comment = db.Column(db.String(1000), nullable=False)
     blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __init__(self, comment, blog_id, user_id):
+        self.comment = comment
+        self.blog_id = blog_id
+        self.user_id = user_id
+
+    def __repr__(self):
+        return '<Comment: {}>'.format(self.comment)
