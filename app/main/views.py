@@ -83,3 +83,13 @@ def update_blog(id):
         return render_template('singleBlog.html', blog=blog)
 
     return render_template('updateBlog.html', blog=blog, form=form)
+
+
+@main.route('/deleteBlog/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_blog(id):
+    blog = Blog.query.filter_by(id=id).first()
+    blog.delete()
+
+    blogs = Blog.query.all()
+    return render_template('blogsIndex.html', blogs=blogs)
