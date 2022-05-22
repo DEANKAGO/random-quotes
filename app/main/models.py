@@ -35,3 +35,20 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
+
+
+class Blog(BaseModel, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(500), nullable=False)
+    blog = db.Column(db.String(1000), nullable=False)
+    timestamp = db.Column(db.Date(), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __init__(self, title, blog, timestamp, user_id):
+        self.title = title
+        self.blog = blog
+        self.timestamp = timestamp
+        self.user_id = user_id
+
+    def __repr__(self):
+        return '<Blog: {}>'.format(self.id)
