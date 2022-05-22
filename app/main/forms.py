@@ -18,3 +18,11 @@ class LoginForm(FlaskForm):
     password = PasswordField('Enter Password', validators=[
                              DataRequired("Password Required")])
     submit = SubmitField('submit')
+
+
+class BlogForm(FlaskForm):
+    title = StringField('Enter blog title', validators=[
+                        DataRequired("Cannot be empty")])
+    blog = StringField('Share your blog', validators=[
+        DataRequired("Cannot be empty")])
+    submit = SubmitField('submit')
