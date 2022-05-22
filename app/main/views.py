@@ -55,3 +55,11 @@ def post_blog():
         blog.create()
         return render_template('singleBlog.html', blog=blog)
     return render_template('addBlog.html', form=form)
+
+
+class Blog(BaseModel, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(500), nullable=False)
+    blog = db.Column(db.String(1000), nullable=False)
+    timestamp = db.Column(db.Date(), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
