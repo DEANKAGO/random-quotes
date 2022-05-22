@@ -41,3 +41,17 @@ def login():
         register_form = RegisterForm()
         return render_template('registerPage.html', form=register_form)
     return render_template("login.html", form=login_form)
+
+
+@main.route('/postBlog', methods=['GET', 'POST'])
+@login_required
+def post_blog():
+    form = BlogForm()
+    if form.is_submitted():
+        blog = Blog(title=form.title.data,
+                    blog=form.blog.data,
+                    timestamp=datetime.now(),
+                    user_id=current_user.id)
+        blog.create()
+        return render_template('singleBlog.html', blog=blog)
+    return render_template('addBlog.html', form=form)
