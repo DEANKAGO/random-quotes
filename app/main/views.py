@@ -25,3 +25,19 @@ def create_user():
 
         return render_template('login.html', form=login_form)
     return render_template("registerPage.html", form=register_form)
+
+
+@main.route('/login', methods=['GET', 'POST'])
+def login():
+    login_form = LoginForm()
+    if login_form.validate_on_submit():
+        user = User.query.filter_by(email=login_form.email.data,
+                                    password=login_form.password.data).first()
+
+        if user:
+            login_user(user)
+            return render_template('home.html', user=user)
+
+        register_form = RegisterForm()
+        return render_template('registerPage.html', form=register_form)
+    return render_template("login.html", form=login_form)

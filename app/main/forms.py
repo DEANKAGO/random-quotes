@@ -11,3 +11,10 @@ class RegisterForm(FlaskForm):
     password = PasswordField('Enter Password', validators=[
                              DataRequired("Password Required")])
     submit = SubmitField('submit')
+
+class LoginForm(FlaskForm):
+    email = StringField('Enter Email', validators=[
+                        DataRequired("Email Required"), ])
+    password = PasswordField('Enter Password', validators=[
+                             DataRequired("Password Required")])
+    submit = SubmitField('submit')
