@@ -57,3 +57,7 @@ def post_blog():
     return render_template('addBlog.html', form=form)
 
 
+@main.route('/blogs', methods=['GET'])
+def get_all_blogs():
+    blogs = Blog.query.all()
+    return render_template('blogsIndex.html', blogs=blogs)
