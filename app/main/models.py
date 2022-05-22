@@ -52,3 +52,10 @@ class Blog(BaseModel, db.Model):
 
     def __repr__(self):
         return '<Blog: {}>'.format(self.id)
+
+
+class Comment(BaseModel, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.String(1000), nullable=False)
+    blog_id = db.Column(db.Integer, db.ForeignKey('blog.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
