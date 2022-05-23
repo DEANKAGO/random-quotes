@@ -93,3 +93,17 @@ def delete_blog(id):
 
     blogs = Blog.query.all()
     return render_template('blogsIndex.html', blogs=blogs)
+
+# Comments
+
+@main.route('/postComment/<int:blogId>', methods=['GET', 'POST'])
+@login_required
+def post_comment(blogId):
+    form = CommentForm()
+    if form.is_submitted():
+        comment = Comment(comment=form.comment.data,
+                          blog_id=blogId,
+                          user_id=current_user.id)
+        comment.create()
+        return render_template('singleComment.html', comment=comment)
+    return render_template('addComment.html', form=form)
