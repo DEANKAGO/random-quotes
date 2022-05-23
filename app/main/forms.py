@@ -40,3 +40,9 @@ class CommentForm(FlaskForm):
     comment = StringField('Enter a comment', validators=[
         DataRequired("Cannot be empty")])
     submit = SubmitField('submit')
+
+
+class UpdateCommentForm(FlaskForm):
+    comment = StringField('update comment', validators=[
+        DataRequired("Cannot be empty")])
+    submit = SubmitField('submit')
