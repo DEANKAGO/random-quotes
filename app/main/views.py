@@ -13,6 +13,14 @@ from .forms import (RegisterForm,
                     CommentForm)
 
 
+@main.route('/', methods=['GET'])
+def home():
+    _quote = requests.get('http://quotes.stormconsultancy.co.uk/random.json')
+    quote = _quote.json()
+    blogs = Blog.query.all()
+    return render_template('home.html', user=current_user, quote=quote, blogs=blogs)
+
+
 @main.route('/register', methods=['GET', 'POST'])
 def create_user():
     register_form = RegisterForm()
