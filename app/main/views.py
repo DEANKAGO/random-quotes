@@ -107,3 +107,9 @@ def post_comment(blogId):
         comment.create()
         return render_template('singleComment.html', comment=comment)
     return render_template('addComment.html', form=form)
+
+
+@main.route('/comment/<int:id>', methods=['GET'])
+def get_comment(id):
+    comment = Comment.query.filter_by(id=id).first()
+    return render_template('singleComment.html', comment=comment)
