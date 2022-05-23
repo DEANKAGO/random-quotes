@@ -113,3 +113,17 @@ def post_comment(blogId):
 def get_comment(id):
     comment = Comment.query.filter_by(id=id).first()
     return render_template('singleComment.html', comment=comment)
+
+
+@main.route('/updateComment/<int:id>', methods=['GET', 'POST'])
+@login_required
+def update_comment(id):
+    comment = Comment.query.filter_by(id=id).first()
+    form = UpdateCommentForm(comment=comment.comment)
+
+    if form.is_submitted():
+        comment.comment = form.comment.data
+        comment.update()
+        return render_template('singleComment.html', blog=blog)
+
+    return render_template('updateComment.html', comment=comment, form=form)
