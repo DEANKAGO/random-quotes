@@ -26,3 +26,11 @@ class BlogForm(FlaskForm):
     blog = StringField('Share your blog', validators=[
         DataRequired("Cannot be empty")])
     submit = SubmitField('submit')
+
+
+class UpdateBlogForm(FlaskForm):
+    title = StringField('Update blog title', validators=[
+                        DataRequired("Cannot be empty")])
+    blog = StringField('Update your blog', validators=[
+        DataRequired("Cannot be empty")])
+    submit = SubmitField('submit')
