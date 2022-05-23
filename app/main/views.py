@@ -127,3 +127,14 @@ def update_comment(id):
         return render_template('singleComment.html', blog=blog)
 
     return render_template('updateComment.html', comment=comment, form=form)
+
+
+@main.route('/deleteComment/<int:id>', methods=['GET', 'POST'])
+@login_required
+def delete_comment(id):
+    comment = Comment.query.filter_by(id=id).first()
+    blog_id = comment.blog_id
+    comment.delete()
+
+    blog = Blog.query.filter_by(id=blog_id).first()
+    return render_template('singleBlog.html', blog=blog)
