@@ -1,7 +1,7 @@
 import requests
 from datetime import datetime
 
-from flask import render_template
+from flask import render_template, redirect, url_for
 from flask_login import login_user, current_user, login_required
 
 from . import main
@@ -31,7 +31,7 @@ def create_user():
                     password=register_form.password.data)
         user.create()
 
-        return render_template('login.html', form=login_form)
+        return redirect(url_for('main.login'))
     return render_template("registerPage.html", form=register_form)
 
 
@@ -40,15 +40,16 @@ def login():
     login_form = LoginForm()
     if login_form.validate_on_submit():
         user = User.query.filter_by(email=login_form.email.data,
-                                    password=login_form.password.data).first()
+                                password=login_form.password.data).first()
 
         if user:
             login_user(user)
-            return render_template('home.html', user=user)
+            return redirect(url_for('main.home'))
 
         register_form = RegisterForm()
-        return render_template('registerPage.html', form=register_form)
     return render_template("login.html", form=login_form)
+
+
 
 
 @main.route('/postBlog', methods=['GET', 'POST'])
@@ -141,8 +142,15 @@ def update_comment(id):
 @login_required
 def delete_comment(id):
     comment = Comment.query.filter_by(id=id).first()
+    blog_id=blogId,
     blog_id = comment.blog_id
     comment.delete()
 
     blog = Blog.query.filter_by(id=blog_id).first()
     return render_template('singleBlog.html', blog=blog)
+
+
+@main.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('main.home'))

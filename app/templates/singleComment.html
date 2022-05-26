@@ -1,11 +1,20 @@
 {% extends 'base.html' %} {% block main_content %}
-<h3>
-  Comment: {{comment.comment}}
-</h3>
-<p>
-  blog Id: {{comment.blog_id}}
-</p>
-<p>
-  User Id: {{comment.user_id}}
-</p>
+<h3>Comment: {{comment.comment}}</h3>
+<p>blog Id: {{comment.blog_id}}</p>
+<p>User Id: {{comment.user_id}}</p>
+<div class="d-flex">
+<a
+  class="btn btn-primary btn-sm"
+  href="{{ url_for( 'main.update_comment' , id=comment.id ) }}"
+>
+  <img src="" alt="" />update comment
+</a>
+<a
+  class="btn btn-danger btn-sm"
+  href="{{ url_for( 'main.delete_comment' , id=comment.id ) }}"
+>
+  <img src="" alt="" />delete comment
+</a>
+</div>
+
 {% endblock %}

@@ -9,7 +9,8 @@ class Config:
     The default configuration class
     """
     DEBUG = False
-    SECRET_KEY = os.getenv('SECRET_KEY')
+    SECRET_KEY = 'verysecretkey'
+    
 
 
 class DevelopmentConfig(Config):
@@ -18,7 +19,7 @@ class DevelopmentConfig(Config):
     """
     DEBUG = True
     ENV = 'development'
-    SQLALCHEMY_DATABASE_URI = os.getenv('DEV_DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///app.db'
 
 
 class TestingConfig(Config):

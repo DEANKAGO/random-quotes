@@ -2,9 +2,10 @@
 <h1>
   Hello {{user.username | capitalize}}!
 </h1>
-<h3>
+<h5>
+  <h4>Random Quotes</h4>
   {{quote['quote']}}
-</h3>
+</h5>
 <p>
   Author: {{quote['author']}}
 </p>
@@ -13,18 +14,34 @@
 </h1>
 
 {% for blog in blogs %}
-<a href="{{ url_for( 'main.get_blog' , id=blog.id ) }}">
-  <h1>
-    {{blog.title}}
-  </h1>
-  <p>
-    {{blog.blog}}
-  </p>
-  <p>
-    {{blog.timestamp.isoformat()}}
-  </p>
-  <p>
-    ID: {{blog.id}}
-  </p>
-</a>
+
+<div class="card">
+  <a href="{{ url_for( 'main.get_blog' , id=blog.id ) }}">
+    <h3>
+      {{blog.title}}
+    </h3>
+    <p>
+      {{blog.blog}}
+    </p>
+    <p>
+      {{blog.timestamp.isoformat()}}
+    </p>
+    <p>
+      ID: {{blog.id}}
+    </p>
+    <div class="d-flex ">
+      <a class="btn btn-secondary  btn-sm" href="{{ url_for( 'main.update_blog' , id=blog.id ) }}">
+        <img src="" alt="" />Update Blog
+      </a>
+
+      <a class="btn btn-danger  btn-sm" href="{{ url_for( 'main.delete_comment' , id=blog.id ) }}">
+        <img src="" alt="" />comment
+      </a>
+
+      <a class="btn btn-danger  btn-sm" href="{{ url_for( 'main.delete_blog' , id=blog.id ) }}">
+        <img src="" alt="" />Delete Blog
+      </a>
+    </div>
+  </a>
+</div>
 {% endfor %} {% endblock %}
