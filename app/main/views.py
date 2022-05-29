@@ -142,7 +142,6 @@ def update_comment(id):
 @login_required
 def delete_comment(id):
     comment = Comment.query.filter_by(id=id).first()
-    blog_id=blogId,
     blog_id = comment.blog_id
     comment.delete()
 
