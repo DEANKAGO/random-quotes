@@ -1,10 +1,10 @@
-# random-quotes
+# Random-quotes
 
 ## Description : <p> This is a personal blogging website where you can create and share your opinions and other users can read and comment on them. Random quotes are also displayed to inspire your users.
  </p>
 ##### By Martin Kago
 
-### random-quotes link : 54.91.14.55:4000/
+### Random-quotes link : 54.91.14.55:4000/
 
 ## Table of Content
 
